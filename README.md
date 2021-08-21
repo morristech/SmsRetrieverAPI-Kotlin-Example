@@ -48,9 +48,11 @@ In next few steps you will see how to create hash keys.
 1. AppSignatureHashHelper class is responsible to get Hash key associated with your app as per your packege id. This is only one time required to get your app's hash key it would always be same unless you are changing app's package id.
 
 ‍‍‍‍‍‍ ```kotlin
+
     // Inside Main Activity 
     Log.d(TAG, "HashKey: " + appSignatureHashHelper.getAppSignatures().get(0));
     // Inside  log cat Apps Hash Key: qzwS5M4KQ5H
+    
 ```        
                 
 2. Declare this SMSReceiver in your app's manifest file in side application tag.
