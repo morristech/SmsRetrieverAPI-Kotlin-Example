@@ -1,0 +1,2 @@
+rootProject.name = "SMS Retriever API"
+include ':app'
