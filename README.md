@@ -33,14 +33,15 @@ SMS alwayse starts with <#> sign and have a hash key FA+9qCX9VSu to identify you
 In next few steps you will see how to create hash keys.
 
 # Dependencies used
-    // Add at app level gradle file
+
+       // Add at app level gradle file
        implementation 'com.google.android.gms:play-services-base:17.6.0'
        implementation 'com.google.android.gms:play-services-identity:17.0.1'
        implementation 'com.google.android.gms:play-services-auth:19.2.0'
        implementation 'com.google.android.gms:play-services-auth-api-phone:17.5.1'
 
-     // Note: If you have migrated your code to AndroidX than add this for LocalBroadCastManager
-         implementation 'androidx.localbroadcastmanager:localbroadcastmanager:1.0.0'
+       // Note: If you have migrated your code to AndroidX than add this for LocalBroadCastManager
+       implementation 'androidx.localbroadcastmanager:localbroadcastmanager:1.0.0'
 
     
 # Integration steps
@@ -53,6 +54,7 @@ In next few steps you will see how to create hash keys.
                 
 2. Declare this SMSReceiver in your app's manifest file in side application tag.
 
+```xml
         <receiver
             android:name=".SMSReceiver"
             android:exported="true">
@@ -60,15 +62,19 @@ In next few steps you will see how to create hash keys.
                 <action android:name="com.google.android.gms.auth.api.phone.SMS_RETRIEVED" />
             </intent-filter>
         </receiver> 
+```
 3. Create SMSReceiver class that will listen SMS and extract code and create OTPReceiveListener that will communicate with Activities/Fragments.
-      
+
+```kotlin
        interface OTPReceiveListener {
           fun onOTPReceived(otp: String?)
           fun onOTPTimeOut()
           fun onOTPReceivedError(error: String?)
         }
+```
 4.  Create SMSReceiver listener and Initiate SmsRetrieverClient.
-
+5.  
+```kotlin
         private fun startSMSListener() {
         try {
             smsReceiver = SMSReceiver()
@@ -90,20 +96,16 @@ In next few steps you will see how to create hash keys.
             e.printStackTrace()
         }
     }
-5. You will receive OTP in call back methods implemented in you  Activity/Fragment.
+```    
     
-       override fun onOTPReceived(otp: String?) {
-        
-    }
+5. You will receive OTP in call back methods implemented in you  Activity/Fragment.
+```kotlin
+        override fun onOTPReceived(otp: String?) { }
 
-    override fun onOTPTimeOut() {
+        override fun onOTPTimeOut() { }
 
-}
-
-    override fun onOTPReceivedError(error: String?) {
-
-}
-
+        override fun onOTPReceivedError(error: String?) { }
+```
 
 # Server Side Implementation / SMS Guide
 [Google's official doc](https://developers.google.com/identity/sms-retriever/verify)
